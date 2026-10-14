@@ -18,6 +18,8 @@ The following properties can all be controlled directly through their correspond
 * The percentage fade of the "trail"
 * The minimum opacity of the "trail"
 
+This project uses the [qtpy](https://github.com/spyder-ide/qtpy) abstraction layer to support PyQt6, PyQt5, PySide6, and PySide2 backends.
+
 ### Usage
 
 Despite being highly configurable, QtWaitingSpinner is extremely easy to use and, to make things even easier, the "QtWaitingSpinnerTest" application can assist you in determining the exact shape, size and color you'd like your spinner to have.

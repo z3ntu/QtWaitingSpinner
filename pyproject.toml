@@ -1,0 +1,78 @@
+# pyproject.toml
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "QtWaitingSpinner"
+description = "A waiting spinner for Python Qt"
+version = "1.0"
+keywords = ["gui"]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ email = "luca@z3ntu.xyz" }, { name = "Luca Weiss" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Desktop Environment",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Software Development :: Widget Sets",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "qtpy>=1.7.0",
+]
+
+# extras
+[project.optional-dependencies]
+pyqt5 = ["pyqt5>=5.12.0"]
+pyqt6 = ["pyqt6"]
+pyside2 = [
+    "pyside2>=5.14 ; python_version=='3.8'",
+    "pyside2>=5.15 ; python_version>='3.9'",
+]
+pyside6 = ["pyside6"]
+testing = [
+    "pytest",
+    "pytest-qt",
+    "pytest-cov",
+]
+
+[project.urls]
+homepage = "https://github.com/z3ntu/QtWaitingSpinner"
+repository = "https://github.com/z3ntu/QtWaitingSpinner"
+issues = "https://github.com/z3ntu/QtWaitingSpinner/issues"
+documentation = "https://github.com/z3ntu/QtWaitingSpinner"
+
+[tool.hatch.envs.test]
+features = ["testing"]
+[tool.hatch.envs.test.scripts]
+run = "pytest  -v --color=yes --cov-config=pyproject.toml --cov --cov-report=xml --cov-report=term-missing"
+[[tool.hatch.envs.test.matrix]]
+backend = ["pyqt5", "pyside2", "pyqt6", "pyside6"]
+[tool.hatch.envs.test.overrides]
+matrix.backend.features = [
+    { value = "pyqt5", if = [
+        "pyqt5",
+    ] },
+    { value = "pyside2", if = [
+        "pyside2",
+    ] },
+    { value = "pyqt6", if = [
+        "pyqt6",
+    ] },
+    { value = "pyside6", if = [
+        "pyside6",
+    ] },
+]
